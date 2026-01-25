@@ -95,6 +95,52 @@
 </div>
 
 <style>
+/* Floating WhatsApp Button */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+/* Product Card Hover Effect */
+.product-card {
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: #ff4081;
+}
+
+/* Announcement Bar */
+.top-bar {
+    background: #ff4081;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
 .card {
     overflow: hidden; /* This keeps the zoom inside the card */
 }
@@ -111,7 +157,14 @@
   70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
-</style>
+<a href="https://wa.me/917485053280" class="whatsapp-float" target="_blank">
+    <i class="fa fa-whatsapp"></i>
+    <span style="font-size: 10px; position: absolute; bottom: -20px; color: #333;">Chat Now</span>
+</a>
+
+<div class="top-bar">
+    ✨ SPECIAL OFFER: 10% OFF ON YOUR FIRST ORDER! ✨
+</div></style>
         <h1>OM COSMETIC SHOP</h1>
         <p>All Beauty & Cosmetic Products Available</p>
         <br>
@@ -218,9 +271,9 @@
     <h2 style="font-family: 'Playfair Display', serif; color: #c2185b; margin-bottom: 10px;">Visit Our Shop Virtually</h2>
     <p style="margin-bottom: 20px; color: #555;">Take a look at our wide range of 100% original beauty products.</p>
     
-    <div style="max-width: 400px; margin: 0 auto; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 5px solid white;">
-        <video width="100%" controls poster="images2/p1.jpg">
-            <source src="shop-video.mp4" type="video/mp4">
+    <div style="max-width: 300px; margin: 0 auto; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 5px solid white;">
+        <video width="100%" controls poster="p1.jpg">
+            <source src="images2/shop-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
