@@ -7,7 +7,25 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <style>
+    <style>/* Review Section Styling */
+.review-container {
+    background: #fff0f5;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+.dark-theme .review-container {
+    background: #2a2a2a;
+}
+.stars { color: #ffbc00; font-size: 20px; margin-bottom: 10px; }
+.review-text { font-style: italic; font-size: 16px; margin: 10px 0; }
+.customer-name { font-weight: bold; color: #ff4081; }
+.search-container input:focus {
+    outline: none;
+    border-color: #ff4081; /* Matches your pink theme */
+    box-shadow: 0 0 10px rgba(255, 64, 129, 0.2);
+}
 /* Dark Mode Colors */
 body.dark-theme {
     background-color: #121212;
@@ -102,7 +120,41 @@ body.dark-theme {
             header h1 { font-size: 30px; }
             nav { flex-direction: column; align-items: center; gap: 10px; }
         }
-    </style>
+    /* Instagram Grid Style */
+.insta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+.insta-grid img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 10px;
+    filter: grayscale(20%);
+    transition: 0.3s;
+}
+.insta-grid img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+/* Celebration Message */
+#order-celebration {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff4081;
+    color: white;
+    padding: 40px;
+    border-radius: 50%;
+    z-index: 9999;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(255, 64, 129, 0.8);
+}</style>
 </head>
 <body>
 <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
@@ -127,7 +179,26 @@ body.dark-theme {
   <span style="font-size: 14px; color: #fff; font-weight: bold;">We are Online - Chat Now</span>
 </div>
 
-<style>
+<style>.camera-btn {
+    background-color: #ff4081;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+    transition: 0.3s;
+}
+
+.camera-btn:hover
+<button id="send-whatsapp-btn" class="camera-btn" style="display: none; background-color: #25d366; margin-top: 10px;">
+    💬 Send Selfie for Shade Advice
+</button>
+ {
+    background-color: #e91e63;
+    transform: scale(1.05);
+}
 /* Floating WhatsApp Button */
 .whatsapp-float {
     position: fixed;
@@ -263,7 +334,18 @@ body.dark-theme {
     </div>
   </div>
 </div>
-            <div class="product-card filter-item makeup">
+           
+<div class="camera-section" style="text-align: center; margin: 20px;">
+    <p>Try it on! Take a selfie to see your look ✨</p>
+    <label for="selfie-upload" class="camera-btn">
+        📸 Open Selfie Camera
+    </label>
+    <input type="file" id="selfie-upload" accept="image/*" capture="user" style="display: none;">
+    
+    <div id="selfie-preview" style="margin-top: 15px;">
+        <img id="preview-img" src="" style="max-width: 250px; border-radius: 15px; display: none; margin: 0 auto;">
+    </div>
+</div> <div class="product-card filter-item makeup">
                 <img src="images2/p1.jpg" alt="Test Image" style="width:200px; border: 5px solid red;">
                 <h3>Branded Makeup</h3>
                 <p>Latest collection available now.</p>
@@ -300,7 +382,15 @@ body.dark-theme {
             <a href="https://wa.me/917485053208" style="color: #c2185b; font-weight: bold; text-decoration: none;">Chat with us now!</a>
         </div>
     </div>
-<section style="text-align: center; padding: 50px 20px; background-color: #fff0f5; border-radius: 20px; margin: 20px;">
+<div class="review-container">
+    <h2 style="margin-top:0;">What Our Queens Say 👑</h2>
+    <div id="review-box">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"The Rani Pink lipstick is amazing! Long-lasting and very pigmented. Best shop in Araria!"</p>
+        <p class="customer-name">- Anjali Kumari</p>
+    </div>
+    <button onclick="nextReview()" style="margin-top:15px; background:none; border:1px solid #ff4081; border-radius:10px; cursor:pointer;">Next Review ➔</button>
+</div><section style="text-align: center; padding: 50px 20px; background-color: #fff0f5; border-radius: 20px; margin: 20px;">
     <h2 style="font-family: 'Playfair Display', serif; color: #c2185b; margin-bottom: 10px;">Visit Our Shop Virtually</h2>
     <p style="margin-bottom: 20px; color: #555;">Take a look at our wide range of 100% original beauty products.</p>
     
@@ -347,8 +437,92 @@ body.dark-theme {
         <p>© 2026 OM COSMETIC SHOP. All Rights Reserved.</p>
     </footer>
 
-    <script>
+    <script>// Review Slider Logic
+const reviews = [
+    {stars: "⭐⭐⭐⭐⭐", text: '"The Rani Pink lipstick is amazing! Long-lasting and very pigmented. Best shop in Araria!"', name: "- Anjali Kumari"},
+    {stars: "⭐⭐⭐⭐⭐", text: '"I love the Dark Mode on this site. Shopping at night is so easy now. Great service!"', name: "- Priya Singh"},
+    {stars: "⭐⭐⭐⭐", text: '"Good quality products. The WhatsApp support helped me choose the right foundation shade."', name: "- Muskan Parveen"}
+];
 
+let reviewIndex = 0;
+function nextReview() {
+    reviewIndex = (reviewIndex + 1) % reviews.length;
+    document.querySelector('.stars').innerHTML = reviews[reviewIndex].stars;
+    document.querySelector('.review-text').innerHTML = reviews[reviewIndex].text;
+    document.querySelector('.customer-name').innerHTML = reviews[reviewIndex].name;
+}
+
+document.getElementById('selfie-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = document.getElementById('preview-img');
+            img.src = event.target.result;
+            img.style.display = "block";
+        }
+        reader.readAsDataURL(file);
+    }
+});
+<script>document.getElementById('selfie-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = document.getElementById('preview-img');
+            img.src = event.target.result;
+            img.style.display = "block";
+            
+            // Show the WhatsApp button now that we have a photo
+            document.getElementById('send-whatsapp-btn').style.display = "inline-block";
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+// WhatsApp Send Logic
+document.getElementById('send-whatsapp-btn').addEventListener('click', function() {
+    const message = encodeURIComponent("Hello! I just took a selfie on your website. I need help picking the right makeup shade!");
+    window.open(`https://wa.me/917485053280?text=${message}`, '_blank');
+});
+    // DARK MODE LOGIC
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        toggleBtn.innerHTML = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+    });
+
+    // SEARCH LOGIC
+    const searchInput = document.getElementById('productSearch');
+    searchInput.addEventListener('keyup', () => {
+        const filter = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            const title = card.innerText.toLowerCase();
+            card.style.display = title.includes(filter) ? "" : "none";
+        });
+    });
+document.getElementById('selfie-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = document.getElementById('preview-img');
+            img.src = event.target.result;
+            img.style.display = "block";
+            
+            // Show the WhatsApp button now that we have a photo
+            document.getElementById('send-whatsapp-btn').style.display = "inline-block";
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+// WhatsApp Send Logic
+document.getElementById('send-whatsapp-btn').addEventListener('click', function() {
+    const message = encodeURIComponent("Hello! I just took a selfie on your website. I need help picking the right makeup shade!");
+    window.open(`https://wa.me/917485053280?text=${message}`, '_blank');
+});</script>
 function sendOrder() {
     var name = document.getElementById('custName').value;
     var product = document.getElementById('prodName').value;
@@ -413,7 +587,18 @@ searchInput.addEventListener('keyup', () => {
             card.style.display = "none"; // Hide
         }
     });
-});</script>
+});
+document.getElementById('send-whatsapp-btn').onclick = () => {
+    // Show the celebration first!
+    const cel = document.getElementById('order-celebration');
+    cel.style.display = "block";
+    
+    // Wait 2 seconds, then open WhatsApp
+    setTimeout(() => {
+        window.open("https://wa.me/917485053280?text=I've saved my selfie! Sending it now for shade help.");
+        cel.style.display = "none";
+    }, 2000);
+};</script>
 <button onclick="topFunction()" id="topBtn" style="display:none; position:fixed; bottom:110px; left:30px; z-index:99; border:none; background:#c2185b; color:white; padding:15px; border-radius:50%; cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">↑</button>
 <script>
     const toggleBtn = document.getElementById('dark-mode-toggle');
@@ -436,8 +621,22 @@ searchInput.addEventListener('keyup', () => {
             toggleBtn.innerHTML = '🌙'; // Show moon icon
         }
     });
-</script></body>
+<div style="text-align: center; margin-top: 40px;">
+    <h2>Follow our Style on Instagram 📸</h2>
+    <div class="insta-grid">
+        <img src="p1.jpg" alt="Insta 1">
+        <img src="p2.jpg" alt="Insta 2">
+        <img src="p3.jpg" alt="Insta 3">
+    </div>
+</div>
+
+<div id="order-celebration">
+    <h1>🎊 HURRAY! 🎊</h1>
+    <p>Redirecting to WhatsApp for your order!</p>
+</div></script></body>
 </html>
 <nav>
 <a href="#location" style="color: white; text-decoration: none;">Visit Us</a>
+
+
 
