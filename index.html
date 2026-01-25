@@ -8,6 +8,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+/* Dark Mode Colors */
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-theme .product-card {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #ffffff;
+}
+
+.dark-theme .top-bar {
+    background: #555; /* Darker bar for dark mode */
+}
+
+/* The Toggle Button Style */
+#dark-mode-toggle {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 20px;
+}
         body { font-family: 'Poppins', sans-serif; margin: 0; background-color: #f8f8f8; color: #333; }
         
         /* Promo Banner */
@@ -75,7 +105,7 @@
     </style>
 </head>
 <body>
-
+<button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
     <div class="promo-banner">
         ✨ <b>SPECIAL OFFER:</b> 10% OFF! Code: <b>WELCOME10</b> ✨
         <a href="https://wa.me/917485053208" class="promo-link">Claim Now</a>
@@ -368,7 +398,28 @@ function topFunction() {
         }
     </script>
 <button onclick="topFunction()" id="topBtn" style="display:none; position:fixed; bottom:110px; left:30px; z-index:99; border:none; background:#c2185b; color:white; padding:15px; border-radius:50%; cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">↑</button>
-</body>
+<script>
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    // Check if the user used Dark Mode before
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        body.classList.add('dark-theme');
+        toggleBtn.innerHTML = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-theme');
+        
+        if (body.classList.contains('dark-theme')) {
+            localStorage.setItem('dark-mode', 'enabled');
+            toggleBtn.innerHTML = '☀️'; // Show sun icon
+        } else {
+            localStorage.setItem('dark-mode', 'disabled');
+            toggleBtn.innerHTML = '🌙'; // Show moon icon
+        }
+    });
+</script></body>
 </html>
 <nav>
 <a href="#location" style="color: white; text-decoration: none;">Visit Us</a>
